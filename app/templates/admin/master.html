@@ -1,0 +1,12 @@
+{% extends admin_base_template %}
+
+{% block head_meta %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+{% block head_css %}
+  {{ super() }}
+  <link href="/static/admin-local.css" rel="stylesheet">
+{% endblock %}
+
