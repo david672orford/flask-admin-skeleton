@@ -1,7 +1,5 @@
-DOCKER_IMAGE=
-DOCKER_CONTAINER=
-DOCKER_NET=static
-DOCKER_IP=172.18.0.X
+DOCKER_IMAGE=flask-admin-skeleton
+DOCKER_CONTAINER=$(shell ./docker-options --docker-container)
 UID=$(shell ls -ldn instance | cut -d' ' -f3)
 
 all: pull build restart
@@ -15,13 +13,11 @@ build:
 build-no-cache:
 	docker build --no-cache --build-arg uid=$(UID) --tag $(DOCKER_IMAGE) .
 
+debug:
+	docker run --rm -it $(shell ./docker-options) $(DOCKER_IMAGE) ./start.py --debug
+
 start:
-	docker run --name $(DOCKER_CONTAINER) \
-		-d --restart=always \
-		--net $(DOCKER_NET) --ip $(DOCKER_IP) \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v `pwd`/instance:/app/instance \
-		$(DOCKER_IMAGE)
+	docker run --detach --restart=always $(shell ./docker-options) $(DOCKER_IMAGE)
 
 stop:
 	docker stop $(DOCKER_CONTAINER)
@@ -33,9 +29,9 @@ shell:
 	docker exec -it $(DOCKER_CONTAINER) /bin/sh
 
 logs:
-	docker logs $(DOCKER_CONTAINER)
+	docker logs $(DOCKER_CONTAINER) 2>&1
 
 tail:
-	docker logs -f $(DOCKER_CONTAINER)
+	docker logs -f $(DOCKER_CONTAINER) 2>&1
 
 

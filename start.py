@@ -1,11 +1,14 @@
 #! /usr/bin/python3
 
 import sys
+import logging
 from werkzeug.serving import run_simple
 from werkzeug.middleware.proxy_fix import ProxyFix
 from app import app
 
 debug_mode = (len(sys.argv) >= 2 and sys.argv[1] == '--debug')
+
+logging.basicConfig(level=logging.DEBUG if debug_mode else logging.INFO)
 
 if not debug_mode:
 	from wsgi_door.providers import init_providers
