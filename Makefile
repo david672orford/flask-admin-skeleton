@@ -8,6 +8,7 @@ pull:
 	git pull
 
 build:
+	test -d instance || mkdir instance
 	docker build --build-arg uid=$(UID) --tag $(DOCKER_IMAGE) .
 
 build-no-cache:
