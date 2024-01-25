@@ -7,8 +7,6 @@ DOCKER_IP = "172.18.0.5"
 # Change this to a secret value before deployment (required)
 #SECRET_KEY = 'put random characters here'
 
-#APP_DISPLAY_NAME = 'Name of Wiki Here'
-
 #============================================================================
 # Access Settings
 #============================================================================

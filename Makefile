@@ -7,15 +7,14 @@ all: pull build restart
 pull:
 	git pull
 
+build-no-cache: BUILD_ARGS=--no-cache
+build-no-cache: build
 build:
 	test -d instance || mkdir instance
-	docker build --build-arg uid=$(UID) --tag $(DOCKER_IMAGE) .
+	docker build $(BUILD_ARGS) --build-arg uid=$(UID) --tag $(DOCKER_IMAGE) .
 
-build-no-cache:
-	docker build --no-cache --build-arg uid=$(UID) --tag $(DOCKER_IMAGE) .
-
-debug:
-	docker run --rm -it $(shell ./docker-options) $(DOCKER_IMAGE) ./start.py --debug
+shell:
+	docker exec -it $(DOCKER_CONTAINER) /bin/sh
 
 start:
 	docker run --detach --restart=always $(shell ./docker-options) $(DOCKER_IMAGE)
@@ -26,13 +25,9 @@ stop:
 
 restart: stop start
 
-shell:
-	docker exec -it $(DOCKER_CONTAINER) /bin/sh
-
 logs:
 	docker logs $(DOCKER_CONTAINER) 2>&1
 
 tail:
 	docker logs -f $(DOCKER_CONTAINER) 2>&1
-
 

@@ -19,4 +19,5 @@ class Users(db.Model):
 	def __str__(self):
 		return "{handle} <{email}>".format(handle=self.handle, email=self.email)
 
-db.create_all()
+with app.app_context():
+	db.create_all()

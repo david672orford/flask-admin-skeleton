@@ -2,10 +2,12 @@ from flask import Flask
 import sys
 
 app = Flask(__name__, instance_relative_config=True)
-default_config = (
+default_config = dict(
 	APP_DISPLAY_NAME = "Flask Admin Skeleton",
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///%s/app.db' % app.instance_path,
 	SQLALCHEMY_TRACK_MODIFICATIONS = False,
+	SQLALCHEMY_ECHO = False,
+	FLASK_ADMIN_FLUID_LAYOUT = True,
 	FLASK_ADMIN_SWATCH = 'cerulean',
 	SECRET_KEY = None,
 	)
