@@ -1,8 +1,9 @@
+Flask==2.2.4
 Flask-Admin==1.6.1
-Flask==2.2.3
 Flask-SQLAlchemy==3.0.3
 SQLAlchemy==2.0.5.post1
-Werkzeug==2.2.3
+WTForms==3.0.1
 Jinja2==3.1.2
 MarkupSafe==2.1.2
-
+Werkzeug==2.2.7
+gunicorn==19.9.0
