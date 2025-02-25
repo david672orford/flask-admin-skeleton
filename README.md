@@ -5,6 +5,7 @@ Includes:
 * Flask-Admin
 * Flask-SQLAlchemy
 * WSGI\_Door
-* Docker container
+* Venv setup for development
+* Docker container for production
 * Makefile for building, starting, and stopping the Docker container
 

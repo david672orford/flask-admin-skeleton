@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 5000
 USER app
 #CMD ["python", "start.py"]
-CMD ["gunicorn", "--workers=4", "--bind=:5000", "--access-logfile=-", "app.production:app"]
+CMD ["gunicorn", "--workers=1", "--threads=4", "--bind=:5000", "--access-logfile=-", "app.production:app"]
